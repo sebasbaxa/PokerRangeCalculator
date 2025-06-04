@@ -505,6 +505,9 @@ class Viewer:
         i, j = self.find_hand_position(hand)
         new_win_rate = (self.value_grid[i][j] + win_rate) / 2
         self.value_grid[i][j] = new_win_rate
+    
+    def reset(self):
+        self.value_grid = [[0] * 13 for _ in range(13)]
 
 
 # GUI code
@@ -668,10 +671,8 @@ class HandGridDisplay:
             self.labels[i][j].config(bg="green", fg="white")
         elif self.viewer.value_grid[i][j] > 0.6:
             self.labels[i][j].config(bg="orange", fg="black")
-        elif self.viewer.value_grid[i][j] > 0.5:
+        elif self.viewer.value_grid[i][j] > 0.45:
             self.labels[i][j].config(bg="yellow", fg="black")
-        elif self.viewer.value_grid[i][j] < 0.2:
-            self.labels[i][j].config(bg="red", fg="black")
         else:
             self.labels[i][j].config(bg="white", fg="black")
 
@@ -761,6 +762,14 @@ def reset_ranges():
     villian_range.card_range = []
     hero_selected.clear()
     villian_selected.clear()
+    viewer.reset()
+    for i in range(13):
+        for j in range(13):
+            hand_grid_display.labels[i][j].config(
+                text=f"{viewer.grid[i][j].title.strip(': ')}\n0.00%",
+                bg="white",
+                fg="black"
+            )
     messagebox.showinfo("Success", "Ranges have been reset.")
 
 # button to run the calculation
@@ -788,23 +797,5 @@ reset_button.place(relx=0.6, rely=0.95, anchor="center")
 
 # Run the tkinter main loop
 root.mainloop()
-
-
-
-
-
-
-
-
-
-
-
-
-            
-
-
-
-
-
 
 
