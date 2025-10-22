@@ -797,5 +797,3 @@ reset_button.place(relx=0.6, rely=0.95, anchor="center")
 
 # Run the tkinter main loop
 root.mainloop()
-
-
