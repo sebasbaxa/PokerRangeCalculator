@@ -32,24 +32,66 @@ The calculator uses Monte Carlo simulation to determine win rates:
 3. Results are aggregated to calculate the win percentage for each hero hand
 4. The grid display updates in real-time with color-coding based on win rates
 
-## Usage
+## Architecture
 
-1. Select "Ranges" from the menu bar
-   - Choose "Hero Range" to select your hands
-   - Choose "Villain Range" to select opponent's range
+| Layer    | Tech                                     | Notes                                   |
+|----------|------------------------------------------|-----------------------------------------|
+| Frontend | React, TypeScript, Vite, Axios           | Renders grids, modals, and SSE listener |
+| Backend  | Flask, SQLAlchemy, SQLite                | Manages ranges, simulations, SSE stream |
+| Simulation | Custom Python engine                    | Builds random boards, evaluates winners |
 
-2. Adjust simulation settings (optional)
-   - Navigate to "Simulation" in the menu
-   - Set the number of simulations per hand
+## Prerequisites
 
-3. Click "Run Calculation" to start the analysis
+- Node.js 18+
+- Python 3.11+
+- PowerShell (for the commands below)
 
-4. Interpret results in the main grid:
-   - Each cell shows the hand and its win rate
-   - Colors indicate strength against the villain range
-   - Higher percentages indicate stronger hands
+## Setup
 
-## Requirements
+1. **Install frontend dependencies**
+   ```powershell
+   cd c:\Projects\PokerProject\frontend
+   npm install
+   ```
 
-- Python 3.x
-- tkinter (usually comes with Python)
+2. **Create and activate a Python virtual environment**
+   ```powershell
+   cd c:\Projects\PokerProject\backend
+   python -m venv .venv
+   .\.venv\Scripts\Activate.ps1
+   ```
+
+3. **Install backend dependencies**
+   ```powershell
+   pip install -r requirements.txt
+   ```
+
+4. **(Optional) Seed fresh database**
+   ```powershell
+   Remove-Item .\instance\poker.db -ErrorAction SilentlyContinue
+   ```
+
+## Running the app
+
+1. **Backend**
+   ```powershell
+   cd c:\Projects\PokerProject\backend
+   .\.venv\Scripts\Activate.ps1
+   flask --app main run --host 127.0.0.1 --port 5000
+   ```
+
+2. **Frontend (new terminal)**
+   ```powershell
+   cd c:\Projects\PokerProject\frontend
+   npm run dev
+   ```
+
+3. Open the Vite URL (default `http://127.0.0.1:5173/`).
+
+## Usage tips
+
+- Add ranges via **Hero Range** / **Villain Range** buttons.
+- Use **Simulation Settings** to adjust trials per hand.
+- Click **Run Calculation** to stream live results.
+- Reset ranges with the **Reset Ranges** button in the footer.
+
