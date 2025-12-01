@@ -16,8 +16,8 @@ Prerequisites:
 - Docker Compose
 
 1) Build and start services
+execute in the PokerProject folder
 ```powershell
-cd c:\Projects\PokerProject
 docker compose up --build
 ```
 
@@ -33,21 +33,3 @@ The backend database is persisted in the Compose volume (backend-data) and store
 - frontend: React/Vite app, range selector, results grid
 - docker-compose.yml: Orchestrates backend + frontend
 - Dockerfiles: Container definitions for backend and frontend
-
-
-## Manual Run (Optional)
-
-If not using Docker:
-```powershell
-# Backend
-cd c:\Projects\PokerProject\backend
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-pip install -r requirements.txt
-flask --app main run --host 127.0.0.1 --port 5000
-
-# Frontend (new terminal)
-cd c:\Projects\PokerProject\frontend
-npm install
-npm run dev
-```
