@@ -16,7 +16,6 @@ Prerequisites:
 - Docker Compose
 
 1) Build and start services
-execute in the PokerProject folder
 ```powershell
 docker compose up --build
 ```
