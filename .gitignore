@@ -5,12 +5,4 @@ instance/
 .env
 .venv/
 *.log
-```// filepath: c:\Projects\PokerProject\backend\.gitignore
-__pycache__/
-*.py[cod]
-*.sqlite3
-instance/
-.env
-.venv/
 node_modules/
-*.log
